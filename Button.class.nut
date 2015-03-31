@@ -3,11 +3,9 @@
 // http://opensource.org/licenses/MIT
 //
 // Description: Debounced button press with callbacks
- 
+
 class Button
 {
-    static NORMALLY_HIGH = 1;
-    static NORMALLY_LOW  = 0;
     _pin             = null;
     _pull            = null;
     _polarity        = null;
@@ -26,16 +24,16 @@ class Button
     }
 
     /*** PRIVATE FUNCTIONS ***/
-    
+
     function _debounce()
     {
         // Make sure callback isn’t triggered during debounce period
         _pin.configure(_pull);
-        
+
         imp.wakeup(0.010, _getState.bindenv(this));  // Bounce times are usually limited to 10ms
     }
 
-    function _getState(){ 
+    function _getState(){
         if( _polarity == _pin.read() )
         {
             if(_releaseCallback != null)
@@ -50,8 +48,8 @@ class Button
                 _pressCallback();
             }
         }
-        
+
         // Re-enabled callback after button action
-        _pin.configure(_pull, _debounce.bindenv(this)); 
+        _pin.configure(_pull, _debounce.bindenv(this));
     }
 }
