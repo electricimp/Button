@@ -4,7 +4,7 @@ This Squirrel class implements debouncing for buttons connected to an imp. It re
 
 ## Class Usage
 
-## Constructor:<br>Button(*pin, pull, polarity, pressCallback, releaseCallback*]
+## Constructor:<br>Button(*pin, pull, polarity, pressCallback, releaseCallback*)
 
 To instantiate a Button object, pass it the following parameters:
 
