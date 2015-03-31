@@ -24,12 +24,14 @@ class Button
         _pin.configure(_pull, debounce.bindenv(this));
     }
 
-    function debounce(){
+    // *** Private functions ***
+    
+    function _debounce(){
         _pin.configure(_pull);
-        imp.wakeup(0.010, getState.bindenv(this));  //Based on googling, bounce times are usually limited to 10ms
+        imp.wakeup(0.010, _getState.bindenv(this));  //Based on googling, bounce times are usually limited to 10ms
     }
 
-    function getState(){ 
+    function _getState(){ 
         if( _polarity == _pin.read() ){
             if(_releaseCallback != null){
                 _releaseCallback();
@@ -39,6 +41,6 @@ class Button
                 _pressCallback();
             }
         }
-        _pin.configure(_pull, debounce.bindenv(this)); 
+        _pin.configure(_pull, _debounce.bindenv(this)); 
     }
 }
