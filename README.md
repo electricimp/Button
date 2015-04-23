@@ -9,11 +9,12 @@ This Squirrel class implements debouncing for buttons connected to an imp. It re
 The Button constructor has two required parameters - *pin*, and *pull* - and three optional parameters - *polarity*, *pressCallback*, *releaseCallback*.
 
 - *pin* &ndash; the *unconfigured* impOS pin object the button is wired to (e.g. ```hardware.pin1```)
-- *pull* &ndash; the impOS constant used to configure the digital input (either ```DIGITAL_IN```, ```DIGITAL_IN_PULLDOWN```, or ```DIGITAL_IN_PULLUP```)
-- *polarity* &ndash; the unpressed button state (either ```Button.NORMALLY_HIGH``` or ```Button.NORMALLY_LOW```). If this parameter is not passed to the ctor, it will be infered based on the pull parameter:
-    - ```DIGITAL_IN_PULLDOWN``` - ```Button.NORMALLY_LOW```
-    - ```DIGITAL_IN_PULLUP``` - ```Button.NORMALLY_HIGH```
+- *pull* &ndash; the impOS constant used to configure the digital input (```DIGITAL_IN```, ```DIGITAL_IN_PULLDOWN```, ```DIGITAL_IN_PULLUP```, or ```DIGITAL_IN_WAKEUP```)
+- *polarity* &ndash; the unpressed button state (```Button.NORMALLY_HIGH``` or ```Button.NORMALLY_LOW```). If this parameter is not passed to the ctor, it will be infered based on the pull parameter:
     - ```DIGITAL_IN``` - ```Button.NORMALLY_HIGH```
+    - ```DIGITAL_IN_PULLUP``` - ```Button.NORMALLY_HIGH```
+    - ```DIGITAL_IN_PULLDOWN``` - ```Button.NORMALLY_LOW```
+    - ```DIGITAL_IN_WAKEUP``` - ```Button.NORMALLY_LOW```
 - *pressCallback* &ndash; the callback function (no parameters) to be executed when the button is pressed.
 - *releaseCallback* &ndash; the callback function (no parameters) to be executed when the button is released.
 

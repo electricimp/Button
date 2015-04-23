@@ -8,25 +8,25 @@ class Button {
     static version = [1, 1, 0];
 
     static NORMALLY_HIGH = 1;
-    static NORMALLY_LOW  = 0;
+    static NORMALLY_LOW = 0;
 
-    _pin             = null;
-    _pull            = null;
-    _polarity        = null;
-    _pressCallback   = null;
+    _pin = null;
+    _pull = null;
+    _polarity = null;
+    _pressCallback = null;
     _releaseCallback = null;
 
     constructor(pin, pull, polarity = null, pressCallback = null, releaseCallback = null) {
-        _pin             = pin;
-        _pull            = pull;
+        _pin = pin;
+        _pull = pull;
 
         if (polarity == null) {
-            if (pull == DIGITAL_IN_PULLDOWN) polarity = NORMALLY_LOW;
+            if (pull == DIGITAL_IN_PULLDOWN || pull == DIGITAL_IN_WAKEUP) polarity = NORMALLY_LOW;
             else polarity = NORMALLY_HIGH;
         }
 
-        _polarity        = polarity;
-        _pressCallback   = pressCallback;
+        _polarity = polarity;
+        _pressCallback = pressCallback;
         _releaseCallback = releaseCallback;
 
         _pin.configure(_pull, _debounce.bindenv(this));
