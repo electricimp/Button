@@ -20,9 +20,9 @@ class Button {
         _pin             = pin;
         _pull            = pull;
 
-        if (_polarity == null) {
-            if (pull == DIGITAL_IN_PULLUP) polarity = NORMALLY_HIGH;
-            else polarity = NORMALLY_LOW;
+        if (polarity == null) {
+            if (pull == DIGITAL_IN_PULLDOWN) polarity = NORMALLY_LOW;
+            else polarity = NORMALLY_HIGH;
         }
 
         _polarity        = polarity;
@@ -34,10 +34,12 @@ class Button {
 
     function onPress(cb) {
         _pressCallback = cb;
+        return this;
     }
 
     function onRelease(cb) {
         _releaseCallback = cb;
+        return this;
     }
 
     /******************** PRIVATE FUNCTIONS (DO NOT CALL) ********************/
