@@ -4,23 +4,44 @@ This Squirrel class implements debouncing for buttons connected to an imp. It re
 
 ## Class Usage
 
-## Constructor:<br>Button(*pin, pull, polarity, pressCallback, releaseCallback*)
+## constructor(*pin, pull, [polarity], [pressCallback], [releaseCallback]*)
 
-To instantiate a Button object, pass it the following parameters:
+The Button constructor has two required parameters - *pin*, and *pull* - and three optional parameters - *polarity*, *pressCallback*, *releaseCallback*.
 
-- *pin* &ndash; the *unconfigured* impOS pin object representing the pin to which the button is wired
-- *pull* &ndash; an impOS constant, either *DIGITAL_IN_PULLDOWN*, *DIGITAL_IN* or *DIGITAL_IN_PULLUP*
-- *polarity* &ndash; the unpressed button state, eg. 1 if the button is pulled up and the button shorts to GND
-- *pressCallback* &ndash; the function to be called if the button is pressed, or `null` if you don’t want to monitor button presses)
-- *releaseCallback* &ndash; the function to be called if the button is release, or `null` if you don’t want to monitor button releases)
-
-The following code shows a typical example of the class’ use. A button is connected to an imp’s pin 7. The other side of the switch runs to GND. Single presses are best monitored by checking for button releases, so that the user’s action is not implemented if they press and hold the button. The button is used to switch an LCD display’s backlight on and off.
+- *pin* &ndash; the *unconfigured* impOS pin object the button is wired to (e.g. ```hardware.pin1```)
+- *pull* &ndash; the impOS constant used to configure the digital input (```DIGITAL_IN```, ```DIGITAL_IN_PULLDOWN```, ```DIGITAL_IN_PULLUP```, or ```DIGITAL_IN_WAKEUP```)
+- *polarity* &ndash; the unpressed button state (```Button.NORMALLY_HIGH``` or ```Button.NORMALLY_LOW```). If this parameter is not passed to the ctor, it will be infered based on the pull parameter:
+    - ```DIGITAL_IN``` - ```Button.NORMALLY_HIGH```
+    - ```DIGITAL_IN_PULLUP``` - ```Button.NORMALLY_HIGH```
+    - ```DIGITAL_IN_PULLDOWN``` - ```Button.NORMALLY_LOW```
+    - ```DIGITAL_IN_WAKEUP``` - ```Button.NORMALLY_LOW```
+- *pressCallback* &ndash; the callback function (no parameters) to be executed when the button is pressed.
+- *releaseCallback* &ndash; the callback function (no parameters) to be executed when the button is released.
 
 ```squirrel
-button <- Button(hardware.pin7, DIGITAL_IN_PULLUP, 1, null, function() {
-  backlightFlag = !backlightFlag
-  display.setBacklight(backlightFlag)
-})
+#require "button.class.nut:1.1.0"
+
+button <- Button(hardware.pin7, DIGITAL_IN_PULLUP);
+```
+
+## button.onPress(callback)
+
+The *onPress* method sets the callback for the button's onPress event (i.e. when the button is depressed). If an onPress callback function is already registered, it will be replaced with the new callback. Setting the callback to ```null``` will result in no action when the button is pressed (this is the default behavior).
+
+```squirrel
+button.onPress(function() {
+  server.log("Button Pressed!");
+});
+```
+
+## button.onRelease(callback)
+
+The *onRelease* method sets the callback for the button's onRelease event (i.e. when the button is released). If an onRelease callback function is already registered, it will be replaced with the new callback. Setting the callback to ```null``` will result in no action when the button is released (this is the default behavior).
+
+```squirrel
+button.onRelease(function() {
+  server.log("Button Released!");
+});
 ```
 
 ## License
