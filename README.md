@@ -2,6 +2,8 @@
 
 This Squirrel class implements debouncing for buttons connected to an imp. It requires one line of code in your device firmware: to instantiate the class. This involves passing callback functions that will be executed, respectively, when the button is pressed and then released. The class automatically handles bounces, ensuring your callbacks are only run when the button has been intentionally pressed and released.
 
+**To add this library to your project, add** `#require "Button.class.nut:1.1.0"` **to the top of your device code**
+
 ## Class Usage
 
 ## constructor(*pin, pull, [polarity], [pressCallback], [releaseCallback]*)
