@@ -2,7 +2,7 @@
 
 This Squirrel class implements debouncing for buttons connected to an imp. It requires one line of code in your device firmware: to instantiate the class. This involves passing callback functions that will be executed, respectively, when the button is pressed and then released. The class automatically handles bounces, ensuring your callbacks are only run when the button has been intentionally pressed and released.
 
-**To add this library to your project, add** `#require "Button.class.nut:1.1.0"` **to the top of your device code**
+**To add this library to your project, add** `#require "Button.class.nut:1.1.1"` **to the top of your device code**
 
 ## Class Usage
 
@@ -43,6 +43,22 @@ The *onRelease* method sets the callback for the button's onRelease event (i.e. 
 ```squirrel
 button.onRelease(function() {
   server.log("Button Released!");
+});
+```
+
+## Method Chaining
+
+All methods return the ```this``` - the instance of the instantiated object.  This allows method chaining as shown below.
+
+```squirrel
+Button(hardware.pin1, DIGITAL_IN_WAKEUP)
+.onPress(function() {
+    server.log("Pressed");
+}).onRelease(function() {
+    server.log("Released.. going to sleep");
+    imp.onidle(function() { server.sleepfor(3600); });
+}).onWakeup(function() {
+    server.log("Woke from button press");
 });
 ```
 
