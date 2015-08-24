@@ -57,8 +57,6 @@ Button(hardware.pin1, DIGITAL_IN_WAKEUP)
 }).onRelease(function() {
     server.log("Released.. going to sleep");
     imp.onidle(function() { server.sleepfor(3600); });
-}).onWakeup(function() {
-    server.log("Woke from button press");
 });
 ```
 
