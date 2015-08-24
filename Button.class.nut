@@ -5,7 +5,7 @@
 // Description: Debounced button press with callbacks
 
 class Button {
-    static version = [1, 1, 0];
+    static version = [1, 1, 1];
 
     static NORMALLY_HIGH = 1;
     static NORMALLY_LOW = 0;
@@ -51,6 +51,9 @@ class Button {
     }
 
     function _getState() {
+        // Re-enabled callback after button action - it's important that this happens first in case we have "long running" callbacks!
+        _pin.configure(_pull, _debounce.bindenv(this));
+
         if( _polarity == _pin.read() )
         {
             if(_releaseCallback != null)
@@ -65,8 +68,5 @@ class Button {
                 _pressCallback();
             }
         }
-
-        // Re-enabled callback after button action
-        _pin.configure(_pull, _debounce.bindenv(this));
     }
 }
