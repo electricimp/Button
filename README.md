@@ -21,7 +21,7 @@ The Button constructor has two required parameters - *pin*, and *pull* - and thr
 - *releaseCallback* &ndash; the callback function (no parameters) to be executed when the button is released.
 
 ```squirrel
-#require "button.class.nut:1.1.0"
+#require "button.class.nut:1.1.1"
 
 button <- Button(hardware.pin7, DIGITAL_IN_PULLUP);
 ```
