@@ -32,12 +32,12 @@ class Button {
         _pin.configure(_pull, _debounce.bindenv(this));
     }
 
-    function onPress(cb) {
+    function onPress(cb=null) {
         _pressCallback = cb;
         return this;
     }
 
-    function onRelease(cb) {
+    function onRelease(cb=null) {
         _releaseCallback = cb;
         return this;
     }
