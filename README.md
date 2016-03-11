@@ -26,7 +26,7 @@ The Button constructor has two required parameters - *pin*, and *pull* - and thr
 button <- Button(hardware.pin7, DIGITAL_IN_PULLUP);
 ```
 
-## button.onPress(callback)
+## button.onPress([callback=null])
 
 The *onPress* method sets the callback for the button's onPress event (i.e. when the button is depressed). If an onPress callback function is already registered, it will be replaced with the new callback. Setting the callback to ```null``` will result in no action when the button is pressed (this is the default behavior).
 
@@ -36,7 +36,7 @@ button.onPress(function() {
 });
 ```
 
-## button.onRelease(callback)
+## button.onRelease([callback=null])
 
 The *onRelease* method sets the callback for the button's onRelease event (i.e. when the button is released). If an onRelease callback function is already registered, it will be replaced with the new callback. Setting the callback to ```null``` will result in no action when the button is released (this is the default behavior).
 
