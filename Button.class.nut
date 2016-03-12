@@ -5,7 +5,7 @@
 // Description: Debounced button press with callbacks
 
 class Button {
-    static version = [1, 1, 1];
+    static version = [1, 2, 0];
 
     static NORMALLY_HIGH = 1;
     static NORMALLY_LOW = 0;
